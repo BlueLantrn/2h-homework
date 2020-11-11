@@ -15,9 +15,9 @@
     <p>Description: <span>{{ ticket.description }}</span></p>
 </div>
 <a routerLink="/tickets">
-<button mat-raised-button color="warn">Retour</button>
+<button mat-raised-button color="warn">Back</button>
 </a>
-<button style="margin-left: 5%;" mat-raised-button color="primary" (click)="editTicket()">Valider</button>
+<button style="margin-left: 5%;" mat-raised-button color="primary" (click)="editTicket()">Save</button>
 <div *ngIf="errorMessage" style="color: red;">
     *{{errorMessage}}
 </div>
