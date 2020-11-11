@@ -5,8 +5,9 @@
         <input matInput (change)="filterTickets($event.target.value)">
       </mat-form-field>
     <mat-list-item role="listitem" *ngFor="let ticket of displayedTickets$ | async"> Ticket: {{ ticket.id }}, {{ ticket.description }}
-        <button mat-mini-fab color="primary" aria-label="details" (click)="navigateToDetails(ticket.id)">
-            <mat-icon>remove_red_eye
+        <button style="margin-left: 1%;" mat-mini-fab color="primary" aria-label="details" (click)="navigateToDetails(ticket.id)">
+            <mat-icon>
+                remove_red_eye
             </mat-icon>
           </button>
     </mat-list-item>
