@@ -1,0 +1,28 @@
+<h2>Details</h2>
+<div *ngIf="ticket$ | async as ticket; else loading">
+    <p>Id: <span>{{ ticket.id }}</span></p>
+    <p>Completed: 
+        <select (change)="changeCompletedValue($event.target.value)">
+            <option *ngFor="let completed of completedValues" [selected]="completed === ticket.completed">{{completed}}</option>
+        </select>
+    </p>
+    <p>AssigneeId: 
+        <select (change)="changeAssignee($event.target.value)">
+            <option *ngIf="ticket.assigneeId === null"></option>
+            <option *ngFor="let user of users$ | async" [selected]="user.id === ticket.assigneeId">{{user.id}}</option>
+        </select>
+    </p>
+    <p>Description: <span>{{ ticket.description }}</span></p>
+</div>
+<a routerLink="/tickets">
+<button mat-raised-button color="warn">Retour</button>
+</a>
+<button style="margin-left: 5%;" mat-raised-button color="primary" (click)="editTicket()">Valider</button>
+<div *ngIf="errorMessage" style="color: red;">
+    *{{errorMessage}}
+</div>
+
+<ng-template #loading>
+    <mat-spinner></mat-spinner>
+    <div>Loading details</div>
+</ng-template>

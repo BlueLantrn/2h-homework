@@ -1,0 +1,23 @@
+<h2>Tickets</h2>
+<mat-nav-list *ngIf="displayedTickets$ | async; else loading">
+    <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (change)="filterTickets($event.target.value)">
+      </mat-form-field>
+    <mat-list-item role="listitem" *ngFor="let ticket of displayedTickets$ | async"> Ticket: {{ ticket.id }}, {{ ticket.description }}
+        <button mat-mini-fab color="primary" aria-label="details" (click)="navigateToDetails(ticket.id)">
+            <mat-icon>remove_red_eye
+            </mat-icon>
+          </button>
+    </mat-list-item>
+    <div>
+        <button mat-raised-button color="primary" (click)="openDialog()">Add a ticket</button>
+    </div>
+    <div *ngIf="errorMessage" style="color: red;">
+        *{{errorMessage}}
+    </div>
+ </mat-nav-list>
+<ng-template #loading>
+    <mat-spinner></mat-spinner>
+    <div>Loading tickets</div>
+</ng-template>

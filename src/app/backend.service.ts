@@ -30,7 +30,7 @@ export class BackendService {
         }
     ];
 
-    public storedUsers: User[] = [{ id: 111, name: 'Victor' }];
+    public storedUsers: User[] = [{ id: 111, name: 'Victor' },{ id: 112, name: 'Teddy' }];
 
     private lastId: number = 1;
 
@@ -70,12 +70,14 @@ export class BackendService {
     public assign(ticketId: number, userId: number): Observable<Ticket> {
         const user = this.findUserById(+userId);
         const foundTicket = this.findTicketById(+ticketId);
+        
 
         if (foundTicket && user) {
             return of(foundTicket).pipe(
                 delay(randomDelay()),
                 tap((ticket: Ticket) => {
-                    ticket.assigneeId = +userId;
+                    let index = this.storedTickets.indexOf(ticket);
+                    this.storedTickets[index].assigneeId = +userId;
                 })
             );
         }
@@ -90,7 +92,8 @@ export class BackendService {
             return of(foundTicket).pipe(
                 delay(randomDelay()),
                 tap((ticket: Ticket) => {
-                    ticket.completed = true;
+                    let index = this.storedTickets.indexOf(ticket);
+                    this.storedTickets[index].completed = completed;
                 })
             );
         }
